@@ -1,0 +1,33 @@
+@baseUrl = http://localhost:3000/api/v1
+
+# Read existing students
+GET {{baseUrl}}/students
+
+###
+
+# Create a new student
+POST {{baseUrl}}/students
+Content-Type: application/json
+Authorization: Bearer sup3r-s3cr3t-4p1-k3y
+
+{
+    "name": "John Doe",
+    "email": "jd@google.com"
+}
+
+###
+
+# Update an existing student (partially)
+PATCH {{baseUrl}}/students/31
+Content-Type: application/json
+Authorization: Bearer sup3r-s3cr3t-4p1-k3y
+
+{
+    "email": "jdoe@google.com"
+}
+
+###
+
+# Delete an existing student
+DELETE {{baseUrl}}/students/31
+Authorization: Bearer sup3r-s3cr3t-4p1-k3y
