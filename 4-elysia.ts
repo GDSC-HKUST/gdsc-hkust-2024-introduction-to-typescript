@@ -27,7 +27,11 @@ const app = new Elysia()
       return { message: "success", id: users[users.length - 1].id };
     },
     {
-      header: { authorization: t.Literal("Bearer " + TOKEN) },
+      beforeHandle: ({ headers, set }) => {
+        if (headers.authorization !== "Bearer " + TOKEN)
+          set.status = "Unauthorized";
+      },
+      header: { authorization: t.String() },
       body: t.Object({
         name: t.String(),
         email: t.String(),
@@ -46,7 +50,11 @@ const app = new Elysia()
       return { message: "success" };
     },
     {
-      header: { authorization: t.Literal("Bearer " + TOKEN) },
+      beforeHandle: ({ headers, set }) => {
+        if (headers.authorization !== "Bearer " + TOKEN)
+          set.status = "Unauthorized";
+      },
+      header: { authorization: t.String() },
       params: t.Object({
         userId: t.Numeric(),
       }),
